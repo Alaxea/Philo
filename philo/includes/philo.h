@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 17:14:41 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:27:58 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*philo_life(void *philo);
 void	one_philo(t_data *data);
 void	start_simulation(t_data *data);
 void	end_simulation(t_data *data);
-int	main(int argc, char **argv);
+int		main(int argc, char **argv);
 /*time*/
 long	get_time(void);
 void	ft_usleep(long time);
