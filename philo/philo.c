@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:59:22 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 17:16:54 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:45:04 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*philo_life(void *philo)
 {
-    t_philo	*ph;
+	t_philo	*ph;
 
-    ph = (t_philo *)philo;
+	ph = (t_philo *)philo;
 	ph->last_meal = get_time();
 	pthread_create(&ph->monitoring, NULL, &check_deaths, ph->data);
 	pthread_detach(ph->monitoring);

@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 17:27:58 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:32:12 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,32 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
-    int				id;
-    int             eat_counter;
-    pthread_t		thread;
-    pthread_t		monitoring;
-    pthread_mutex_t	*left_fork;
-    pthread_mutex_t	*right_fork;
-    struct s_data	*data;
-    long			last_meal;
-}				t_philo;
+	int				id;
+	int				eat_counter;
+	pthread_t		thread;
+	pthread_t		monitoring;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	struct s_data	*data;
+	long			last_meal;
+}					t_philo;
 
 typedef struct s_data
 {
-    int				philo_num;
-    int				time_to_die;
-    int				time_to_eat;
-    int				time_to_sleep;
-    int				eat_num;
-    long			start_time;
-    bool            dead;
-    pthread_t       *threads;
-    pthread_mutex_t	*forks;
-    t_philo			*philos;
+	int				philo_num;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_num;
+	long			start_time;
+	bool			dead;
+	pthread_t		*threads;
+	pthread_mutex_t	*forks;
+	t_philo			*philos;
 }				t_data;
 
 /*action*/
@@ -81,4 +81,3 @@ void	print_dead(t_philo *philo);
 void	print_fork(t_philo *philo);
 
 #endif
-
