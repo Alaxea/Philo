@@ -21,14 +21,14 @@ void	*philo_life(void *philo)
 	pthread_create(&ph->monitoring, NULL, &check_deaths, ph->data);
 	pthread_detach(ph->monitoring);
 	if (ph->id % 2 == 0)
-		ft_usleep(100);
+		ft_usleep(1);
 	while (!ph->data->dead && !did_philos_eat_enough(ph->data))
 	{
 		print_thinking(ph);
 		take_forks(ph);
 		print_eating(ph);
 		ph->last_meal = get_time();
-		ft_usleep(ph->data->time_to_eat - 10);
+		ft_usleep(ph->data->time_to_eat - 5);
 		leave_forks(ph);
 	}
 	return (NULL);

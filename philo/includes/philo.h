@@ -71,7 +71,7 @@ void	end_simulation(t_data *data);
 int		main(int argc, char **argv);
 /*time*/
 long	get_time(void);
-void	ft_usleep(long time);
+void	ft_usleep(int time);
 void	usage(void);
 /*utils*/
 void	print_eating(t_philo *philo);
