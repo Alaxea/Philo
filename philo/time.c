@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:57:07 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 17:36:05 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/16 18:59:52 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ long	get_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void	ft_usleep(int time)
+void	ft_usleep(int ms)
 {
-		usleep(time * 1000);
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < ms)
+		usleep(1000);
 }
 
 void	usage(void)

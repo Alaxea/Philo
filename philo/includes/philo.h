@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 17:32:12 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/16 19:52:41 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_data
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
-}				t_data;
+}					t_data;
 
 /*action*/
 void	take_forks(t_philo *ph);
@@ -71,7 +71,7 @@ void	end_simulation(t_data *data);
 int		main(int argc, char **argv);
 /*time*/
 long	get_time(void);
-void	ft_usleep(int time);
+void	ft_usleep(int ms);
 void	usage(void);
 /*utils*/
 void	print_eating(t_philo *philo);
