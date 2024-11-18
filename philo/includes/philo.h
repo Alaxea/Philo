@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/16 19:52:41 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/18 19:42:41 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data
 	int				eat_num;
 	long			start_time;
 	bool			dead;
+	pthread_mutex_t	print_mutex;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;

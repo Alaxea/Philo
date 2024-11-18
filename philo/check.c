@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 18:07:49 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/18 19:57:16 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ void	*check_deaths(void *void_data)
 	data = (t_data *)void_data;
 	while (1)
 	{
+		pthread_mutex_lock(&data->print_mutex);
 		if (did_philos_eat_enough(data) || data->dead)
 			break ;
+		pthread_mutex_unlock(&data->print_mutex);
 		if (get_time() - data->philos[i].last_meal > data->time_to_die
 			&& data->philos[i].last_meal != -1
 			&& (data->philos[i].eat_counter < data->eat_num
@@ -107,7 +109,8 @@ void	*check_deaths(void *void_data)
 			data->dead = true;
 			exit(EXIT_FAILURE);
 		}
-		i = (i + 1) % data->philo_num;
+		usleep(100);
+		//i = (i + 1) % data->philo_num;
 	}
 	return (0);
 }

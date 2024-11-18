@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:58:57 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 17:54:44 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/18 19:42:35 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_data(t_data *data, int argc, char **argv)
 		data->eat_num = ft_atoi(argv[5]);
 	else
 		data->eat_num = -1;
+	pthread_mutex_init(&data->print_mutex, NULL);
 	data->threads = malloc(sizeof(pthread_t) * data->philo_num);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_num);
 	data->philos = malloc(sizeof(t_philo) * data->philo_num);

@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:57:07 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/16 18:59:52 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/18 19:31:41 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_usleep(int ms)
 	long	start;
 
 	start = get_time();
-	while (get_time() - start < ms)
-		usleep(1000);
+	while ((get_time() - start) < ms)
+		usleep(100);
 }
 
 void	usage(void)
