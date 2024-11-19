@@ -22,5 +22,5 @@ cd philo
 make && ./philo [arguments]
 ```
 
-### Conclusion 
+### Conclusion and Learned insights
 The Dining Philosopher Problem is a great way to understand how to manage shared resources in a system while avoiding problems like deadlock and starvation. It shows how these issues can arise and teaches us how to prevent them by using the right synchronization techniques. Through learning about this, I also got familiar with concepts like mutexes, semaphores, and threads. These are important tools that help control access to resources and ensure that multiple processes can run smoothly without interfering with each other.
