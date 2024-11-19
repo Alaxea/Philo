@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:59:22 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/18 19:42:30 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:02:00 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	*philo_life(void *philo)
 		take_forks(ph);
 		print_eating(ph);
 		ph->last_meal = get_time();
+		ph->eat_counter++;
 		ft_usleep(ph->data->time_to_eat);
 		leave_forks(ph);
 	}
@@ -89,6 +90,7 @@ int	main(int argc, char **argv)
 
 	if (!check_args(argc, argv))
 		usage();
+	error_input(argv);
 	init_data(&data, argc, argv);
 	init_philosophers(&data);
 	init_forks(&data);

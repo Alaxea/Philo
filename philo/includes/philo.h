@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/18 19:42:41 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/19 16:21:36 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct s_data
 void	take_forks(t_philo *ph);
 void	goto_sleep(t_philo *ph);
 void	leave_forks(t_philo *ph);
-/*check.c*/
 bool	did_philos_eat_enough(t_data *data);
+/*check.c*/
 int		ft_atoi(const char *str);
 bool	check_atoi(const char *str);
 bool	check_args(int argc, char **argv);
@@ -74,6 +74,7 @@ int		main(int argc, char **argv);
 long	get_time(void);
 void	ft_usleep(int ms);
 void	usage(void);
+void	error_input(char **argv);
 /*utils*/
 void	print_eating(t_philo *philo);
 void	print_sleeping(t_philo *philo);

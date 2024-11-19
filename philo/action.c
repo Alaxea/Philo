@@ -6,11 +6,27 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/13 18:08:14 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/19 16:21:13 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philo.h"
+
+bool	did_philos_eat_enough(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->eat_num == -1)
+		return (false);
+	while (i < data->philo_num)
+	{
+		if (data->philos[i].eat_counter < data->eat_num)
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 void	take_forks(t_philo *ph)
 {
