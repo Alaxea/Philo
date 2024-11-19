@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:57:07 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/19 15:53:35 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/19 21:10:31 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ long	get_time(void)
 {
 	struct timeval	time;
 
-	gettimeofday(&time, NULL);
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
