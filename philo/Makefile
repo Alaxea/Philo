@@ -39,7 +39,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) -r $(OBJ_PATH)
+	$(RM) -rf $(OBJ_PATH)
 	@echo "$(RED)- $(NAME)$(RESET)"
 
 re: fclean $(NAME)

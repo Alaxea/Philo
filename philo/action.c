@@ -40,7 +40,6 @@ void	goto_sleep(t_philo *ph)
 {
 	print_sleeping(ph);
 	ft_usleep(ph->data->time_to_sleep);
-	//ph->eat_counter++;
 }
 
 void	leave_forks(t_philo *ph)
