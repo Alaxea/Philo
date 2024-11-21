@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/19 16:21:02 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/20 22:44:29 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,13 @@ bool	check_args(int argc, char **argv)
 
 static int	check_time_to_die(t_data *data, int i)
 {
-	return (get_time() - data->philos[i].last_meal > data->time_to_die
+	int		result;
+	 
+	result = (get_time() - data->philos[i].last_meal > data->time_to_die
 		&& data->philos[i].last_meal != -1
 		&& (data->philos[i].eat_counter < data->eat_num
 			|| data->eat_num == -1));
+	return (result);
 }
 
 void	*check_deaths(void *void_data)
@@ -93,18 +96,14 @@ void	*check_deaths(void *void_data)
 	data = (t_data *)void_data;
 	while (1)
 	{
-		pthread_mutex_lock(&data->print_mutex);
 		if (did_philos_eat_enough(data) || data->dead)
 		{
-			pthread_mutex_unlock(&data->print_mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&data->print_mutex);
 		if (check_time_to_die(data, i))
 		{
 			print_dead(&data->philos[i]);
 			data->dead = true;
-			pthread_mutex_unlock(&data->print_mutex);
 			exit(EXIT_FAILURE);
 		}
 		usleep(100);

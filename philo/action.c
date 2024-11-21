@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/19 22:09:52 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/20 22:36:05 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	goto_sleep(t_philo *ph)
 {
 	print_sleeping(ph);
 	ft_usleep(ph->data->time_to_sleep);
-	//ph->eat_counter++;
 }
 
 void	leave_forks(t_philo *ph)
