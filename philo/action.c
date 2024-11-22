@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/20 22:36:05 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:02:16 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,21 @@ bool	did_philos_eat_enough(t_data *data)
 	return (true);
 }
 
-void	take_forks(t_philo *ph)
+void take_forks(t_philo *ph)
 {
-	pthread_mutex_lock(ph->left_fork);
-	print_fork(ph);
-	pthread_mutex_lock(ph->right_fork);
-	print_fork(ph);
+    if (ph->id % 2 == 0) {
+        // Filozof o parzystym ID bierze najpierw lewy, potem prawy widelec
+        pthread_mutex_lock(ph->left_fork);
+        //print_fork(ph);
+        pthread_mutex_lock(ph->right_fork);
+        //print_fork(ph);
+    } else {
+        // Filozof o nieparzystym ID bierze najpierw prawy, potem lewy widelec
+        pthread_mutex_lock(ph->right_fork);
+        //print_fork(ph);
+        pthread_mutex_lock(ph->left_fork);
+        //print_fork(ph);
+    }
 }
 
 void	goto_sleep(t_philo *ph)

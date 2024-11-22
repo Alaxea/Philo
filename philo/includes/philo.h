@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/20 22:44:40 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:59:10 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	struct s_data	*data;
 	long			last_meal;
+	pthread_mutex_t	meal_mutex;
 }					t_philo;
 
 typedef struct s_data
@@ -46,6 +47,7 @@ typedef struct s_data
 	long			start_time;
 	bool			dead;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	dead_mutex;
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
@@ -83,4 +85,7 @@ void	print_thinking(t_philo *philo);
 void	print_dead(t_philo *philo);
 void	print_fork(t_philo *philo);
 
+long long get_last_meal(t_philo *ph);
+int get_eat_counter(t_philo *ph);
+int get_dead(t_data *data);
 #endif

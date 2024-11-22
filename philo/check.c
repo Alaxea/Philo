@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/20 22:44:29 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/22 22:29:50 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,35 @@ bool	check_args(int argc, char **argv)
 	return (true);
 }
 
-static int	check_time_to_die(t_data *data, int i)
+/*static int	check_time_to_die(t_data *data, int i)
 {
 	int		result;
+	t_philo *ph = &data->philos[i];
 	 
-	result = (get_time() - data->philos[i].last_meal > data->time_to_die
-		&& data->philos[i].last_meal != -1
-		&& (data->philos[i].eat_counter < data->eat_num
-			|| data->eat_num == -1));
+	result = (get_time() - get_last_meal(ph) > data->time_to_die
+        && get_last_meal(ph) != -1
+        && (data->philos[i].eat_counter < data->eat_num || data->eat_num == -1));
 	return (result);
+}*/
+
+int get_dead(t_data *data)
+{
+    int dead;
+
+    pthread_mutex_lock(&data->dead_mutex);
+    dead = data->dead;
+    pthread_mutex_unlock(&data->dead_mutex);
+    return dead;
 }
 
-void	*check_deaths(void *void_data)
+static void set_dead(t_data *data, int value)
+{
+    pthread_mutex_lock(&data->dead_mutex);
+    data->dead = value;
+    pthread_mutex_unlock(&data->dead_mutex);
+}
+
+/*void	*check_deaths(void *void_data)
 {
 	int		i;
 	t_data	*data;
@@ -96,18 +113,67 @@ void	*check_deaths(void *void_data)
 	data = (t_data *)void_data;
 	while (1)
 	{
-		if (did_philos_eat_enough(data) || data->dead)
+		if (did_philos_eat_enough(data))
 		{
 			break ;
 		}
 		if (check_time_to_die(data, i))
 		{
 			print_dead(&data->philos[i]);
-			data->dead = true;
-			exit(EXIT_FAILURE);
+			set_dead(data, true);
+			//data->dead = true;
+			break;
 		}
 		usleep(100);
 		i = (i + 1) % data->philo_num;
 	}
 	return (0);
+}*/
+
+static int check_time_to_die(t_data *data, int i)
+{
+    int result;
+    long long last_meal;
+    int eat_counter;
+    t_philo *ph = &data->philos[i];
+
+    // Protect access to shared resources in philo
+    pthread_mutex_lock(&ph->meal_mutex);
+    last_meal = ph->last_meal;
+    eat_counter = ph->eat_counter;
+    pthread_mutex_unlock(&ph->meal_mutex);
+
+    result = (get_time() - last_meal > data->time_to_die
+              && last_meal != -1
+              && (eat_counter < data->eat_num || data->eat_num == -1));
+
+    return result;
 }
+
+
+void *check_deaths(void *void_data)
+{
+    int i = 0;
+    t_data *data = (t_data *)void_data;
+
+    while (1)
+    {
+        if (did_philos_eat_enough(data) || get_dead(data))
+        {
+            break;
+        }
+
+        if (check_time_to_die(data, i))
+        {
+            print_dead(&data->philos[i]);
+            set_dead(data, true);
+            break;
+        }
+
+        usleep(100);
+        i = (i + 1) % data->philo_num;
+    }
+
+    return NULL;
+}
+
