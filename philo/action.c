@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/22 21:02:16 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/23 22:19:38 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,28 @@ bool	did_philos_eat_enough(t_data *data)
 void take_forks(t_philo *ph)
 {
     if (ph->id % 2 == 0) {
-        // Filozof o parzystym ID bierze najpierw lewy, potem prawy widelec
-        pthread_mutex_lock(ph->left_fork);
-        //print_fork(ph);
-        pthread_mutex_lock(ph->right_fork);
-        //print_fork(ph);
+        while (pthread_mutex_lock(ph->left_fork) != 0)
+            usleep(10);  // Małe opóźnienie, aby uniknąć aktywnego oczekiwania
+        printf("Philosopher %d took left fork\n", ph->id);
+
+        while (pthread_mutex_lock(ph->right_fork) != 0) {
+            pthread_mutex_unlock(ph->left_fork);
+            usleep(10);  // Spróbuj ponownie po krótkim czasie
+        }
+        printf("Philosopher %d took right fork\n", ph->id);
     } else {
-        // Filozof o nieparzystym ID bierze najpierw prawy, potem lewy widelec
-        pthread_mutex_lock(ph->right_fork);
-        //print_fork(ph);
-        pthread_mutex_lock(ph->left_fork);
-        //print_fork(ph);
+        while (pthread_mutex_lock(ph->right_fork) != 0)
+            usleep(10);
+        printf("Philosopher %d took right fork\n", ph->id);
+
+        while (pthread_mutex_lock(ph->left_fork) != 0) {
+            pthread_mutex_unlock(ph->right_fork);
+            usleep(10);
+        }
+        printf("Philosopher %d took left fork\n", ph->id);
     }
 }
+
 
 void	goto_sleep(t_philo *ph)
 {
@@ -55,5 +64,4 @@ void	leave_forks(t_philo *ph)
 {
 	pthread_mutex_unlock(ph->left_fork);
 	pthread_mutex_unlock(ph->right_fork);
-	goto_sleep(ph);
 }

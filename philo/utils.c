@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:57:39 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/22 22:32:16 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/24 00:33:35 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_dead(t_philo *philo)
 	if (!philo->data->dead)
 		printf("%ld %d died\n",
 			get_time() - philo->data->start_time, philo->id);
-	//philo->data->dead = true;
+	philo->data->dead = true;
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 

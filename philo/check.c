@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/22 22:29:50 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/24 00:39:44 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	check_args(int argc, char **argv)
 	return (true);
 }
 
-/*static int	check_time_to_die(t_data *data, int i)
+static int	check_time_to_die(t_data *data, int i)
 {
 	int		result;
 	t_philo *ph = &data->philos[i];
@@ -85,7 +85,7 @@ bool	check_args(int argc, char **argv)
         && get_last_meal(ph) != -1
         && (data->philos[i].eat_counter < data->eat_num || data->eat_num == -1));
 	return (result);
-}*/
+}
 
 int get_dead(t_data *data)
 {
@@ -97,12 +97,12 @@ int get_dead(t_data *data)
     return dead;
 }
 
-static void set_dead(t_data *data, int value)
+/*static void set_dead(t_data *data, int value)
 {
     pthread_mutex_lock(&data->dead_mutex);
     data->dead = value;
     pthread_mutex_unlock(&data->dead_mutex);
-}
+}*/
 
 /*void	*check_deaths(void *void_data)
 {
@@ -130,7 +130,7 @@ static void set_dead(t_data *data, int value)
 	return (0);
 }*/
 
-static int check_time_to_die(t_data *data, int i)
+/*static int check_time_to_die(t_data *data, int i)
 {
     int result;
     long long last_meal;
@@ -148,7 +148,7 @@ static int check_time_to_die(t_data *data, int i)
               && (eat_counter < data->eat_num || data->eat_num == -1));
 
     return result;
-}
+}*/
 
 
 void *check_deaths(void *void_data)
@@ -166,10 +166,9 @@ void *check_deaths(void *void_data)
         if (check_time_to_die(data, i))
         {
             print_dead(&data->philos[i]);
-            set_dead(data, true);
+            //set_dead(data, true);
             break;
         }
-
         usleep(100);
         i = (i + 1) % data->philo_num;
     }

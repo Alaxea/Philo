@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:59:22 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/22 23:11:45 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/23 22:30:30 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ void *philo_life(void *philo)
         take_forks(ph);
         print_eating(ph);
         set_last_meal(ph, get_time());
-		//ph->eat_counter++;
-        increment_eat_counter(ph);
+		ph->eat_counter++;
+        //increment_eat_counter(ph);
         ft_usleep(ph->data->time_to_eat);
         leave_forks(ph);
+		goto_sleep(ph);
+		print_thinking(ph);
     }
 	pthread_join(ph->monitoring, NULL);
     return (NULL);
@@ -90,7 +92,7 @@ void	start_simulation(t_data *data)
 	i = 0;
 	while (i < data->philo_num)
 	{
-		data->philos[i].last_meal = data->start_time;		
+		//data->philos[i].last_meal = data->start_time;		
 		pthread_create(&data->threads[i], NULL, &philo_life, &data->philos[i]);
 		i++;
 	}
