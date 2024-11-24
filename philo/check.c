@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/24 13:56:50 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/24 15:52:57 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void *check_deaths(void *void_data)
         usleep(100);
         i = (i + 1) % data->philo_num;
     }
-
     return (NULL);
 }
+
 

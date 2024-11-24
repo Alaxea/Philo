@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/24 11:32:06 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/24 15:48:30 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void take_forks(t_philo *ph)
         printf("Philosopher %d took left fork\n", ph->id);
     }
 }
-
 
 void	go_sleep(t_philo *ph)
 {
