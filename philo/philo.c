@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:59:22 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/23 22:30:30 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/24 13:13:01 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ int get_eat_counter(t_philo *ph)
     return eat_counter;
 }
 
-void increment_eat_counter(t_philo *ph)
-{
-    pthread_mutex_lock(&ph->meal_mutex);
-    ph->eat_counter++;
-    pthread_mutex_unlock(&ph->meal_mutex);
-}
-
 void *philo_life(void *philo)
 {
     t_philo *ph;
@@ -64,10 +57,9 @@ void *philo_life(void *philo)
         print_eating(ph);
         set_last_meal(ph, get_time());
 		ph->eat_counter++;
-        //increment_eat_counter(ph);
         ft_usleep(ph->data->time_to_eat);
         leave_forks(ph);
-		goto_sleep(ph);
+		go_sleep(ph);
 		print_thinking(ph);
     }
 	pthread_join(ph->monitoring, NULL);
@@ -114,18 +106,18 @@ void	end_simulation(t_data *data)
 	int	i;
 
 	i = 0;
-	pthread_mutex_destroy(&data->dead_mutex);
 	pthread_mutex_destroy(&data->philos[0].meal_mutex);
+	pthread_mutex_destroy(&data->dead_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 	while (i < data->philo_num)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
-	if (data->forks)
-		free(data->forks);
 	if (data->threads)
 		free(data->threads);
+	if (data->forks)
+		free(data->forks);
 	if (data->philos)
 		free(data->philos);
 }
@@ -138,8 +130,8 @@ int	main(int argc, char **argv)
 		usage();
 	error_input(argv);
 	init_data(&data, argc, argv);
-	init_philosophers(&data);
 	init_forks(&data);
+	init_philosophers(&data);
 	start_simulation(&data);
 	end_simulation(&data);
 	return (0);
