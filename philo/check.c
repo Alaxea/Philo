@@ -104,53 +104,6 @@ static void set_dead(t_data *data, int value)
     pthread_mutex_unlock(&data->dead_mutex);
 }
 
-/*void	*check_deaths(void *void_data)
-{
-	int		i;
-	t_data	*data;
-
-	i = 0;
-	data = (t_data *)void_data;
-	while (1)
-	{
-		if (did_philos_eat_enough(data))
-		{
-			break ;
-		}
-		if (check_time_to_die(data, i))
-		{
-			print_dead(&data->philos[i]);
-			set_dead(data, true);
-			//data->dead = true;
-			break;
-		}
-		usleep(100);
-		i = (i + 1) % data->philo_num;
-	}
-	return (0);
-}*/
-
-/*static int check_time_to_die(t_data *data, int i)
-{
-    int result;
-    long long last_meal;
-    int eat_counter;
-    t_philo *ph = &data->philos[i];
-
-    // Protect access to shared resources in philo
-    pthread_mutex_lock(&ph->meal_mutex);
-    last_meal = ph->last_meal;
-    eat_counter = ph->eat_counter;
-    pthread_mutex_unlock(&ph->meal_mutex);
-
-    result = (get_time() - last_meal > data->time_to_die
-              && last_meal != -1
-              && (eat_counter < data->eat_num || data->eat_num == -1));
-
-    return result;
-}*/
-
-
 void *check_deaths(void *void_data)
 {
     int i = 0;
@@ -174,5 +127,3 @@ void *check_deaths(void *void_data)
     }
     return (NULL);
 }
-
-

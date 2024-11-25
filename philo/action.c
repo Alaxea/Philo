@@ -30,26 +30,25 @@ bool	did_philos_eat_enough(t_data *data)
 
 void take_forks(t_philo *ph)
 {
-    if (ph->id % 2 == 0) {
+    if (ph->id % 2 == 0) 
+    {
         while (pthread_mutex_lock(ph->left_fork) != 0)
-            usleep(10);  // Małe opóźnienie, aby uniknąć aktywnego oczekiwania
-        printf("Philosopher %d took left fork\n", ph->id);
-
-        while (pthread_mutex_lock(ph->right_fork) != 0) {
+            usleep(10);
+        while (pthread_mutex_lock(ph->right_fork) != 0) 
+        {
             pthread_mutex_unlock(ph->left_fork);
-            usleep(10);  // Spróbuj ponownie po krótkim czasie
+            usleep(10);
         }
-        printf("Philosopher %d took right fork\n", ph->id);
-    } else {
+    } 
+    else 
+    {
         while (pthread_mutex_lock(ph->right_fork) != 0)
             usleep(10);
-        printf("Philosopher %d took right fork\n", ph->id);
-
-        while (pthread_mutex_lock(ph->left_fork) != 0) {
+        while (pthread_mutex_lock(ph->left_fork) != 0) 
+        {
             pthread_mutex_unlock(ph->right_fork);
             usleep(10);
         }
-        printf("Philosopher %d took left fork\n", ph->id);
     }
 }
 

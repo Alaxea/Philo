@@ -93,6 +93,4 @@ int get_eat_counter(t_philo *ph);
 int get_dead(t_data *data);
 void	free_data(t_data *data);
 void print_message(t_philo *philo, char *message);
-//void set_dead(t_data *data, int value);
-//int check_time_to_die(t_data *data, int i);
 #endif

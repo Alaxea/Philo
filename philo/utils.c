@@ -53,28 +53,6 @@ void print_dead(t_philo *philo)
     pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
-/*void	print_thinking(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->print_mutex);
-	if (!philo->data->dead)
-		printf("%ld %d is thinking\n",
-			get_time() - philo->data->start_time, philo->id);
-	pthread_mutex_unlock(&philo->data->print_mutex);
-}
-
-void	print_dead(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->print_mutex);
-	if (!philo->data->dead)
-	{
-		pthread_mutex_lock(&philo->data->dead_mutex);
-		printf("%ld %d died\n",
-			get_time() - philo->data->start_time, philo->id);
-		pthread_mutex_unlock(&philo->data->dead_mutex);
-	}
-	philo->data->dead = true;
-	pthread_mutex_unlock(&philo->data->print_mutex);
-}*/
 
 void	print_fork(t_philo *philo)
 {
