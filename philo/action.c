@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/24 15:48:30 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/26 13:43:35 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,28 @@ bool	did_philos_eat_enough(t_data *data)
 	return (true);
 }
 
-void take_forks(t_philo *ph)
+void	take_forks(t_philo *ph)
 {
-    if (ph->id % 2 == 0) 
-    {
-        while (pthread_mutex_lock(ph->left_fork) != 0)
-            usleep(10);
-        while (pthread_mutex_lock(ph->right_fork) != 0) 
-        {
-            pthread_mutex_unlock(ph->left_fork);
-            usleep(10);
-        }
-    } 
-    else 
-    {
-        while (pthread_mutex_lock(ph->right_fork) != 0)
-            usleep(10);
-        while (pthread_mutex_lock(ph->left_fork) != 0) 
-        {
-            pthread_mutex_unlock(ph->right_fork);
-            usleep(10);
-        }
-    }
+	if (ph->id % 2 == 0)
+	{
+		while (pthread_mutex_lock(ph->left_fork) != 0)
+			usleep(10);
+		while (pthread_mutex_lock(ph->right_fork) != 0)
+		{
+			pthread_mutex_unlock(ph->left_fork);
+			usleep(10);
+		}
+	}
+	else
+	{
+		while (pthread_mutex_lock(ph->right_fork) != 0)
+			usleep(10);
+		while (pthread_mutex_lock(ph->left_fork) != 0)
+		{
+			pthread_mutex_unlock(ph->right_fork);
+			usleep(10);
+		}
+	}
 }
 
 void	go_sleep(t_philo *ph)

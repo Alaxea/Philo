@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/24 15:52:57 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/26 14:42:42 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,54 +76,39 @@ bool	check_args(int argc, char **argv)
 	return (true);
 }
 
-static int	check_time_to_die(t_data *data, int i)
+void	usage(void)
 {
-	int		result;
-	t_philo *ph = &data->philos[i];
-	 
-	result = (get_time() - get_last_meal(ph) > data->time_to_die
-        && get_last_meal(ph) != -1
-        && (data->philos[i].eat_counter < data->eat_num || data->eat_num == -1));
-	return (result);
+	printf("Usage: ./philo [number_of_philosophers] [time_to_die]\
+[time_to_eat] [time_to_sleep]\
+[number_of_times_each_philosopher_must_eat]\n");
+	exit(1);
 }
 
-int get_dead(t_data *data)
+void	error_input(char **argv)
 {
-    int dead;
-
-    pthread_mutex_lock(&data->dead_mutex);
-    dead = data->dead;
-    pthread_mutex_unlock(&data->dead_mutex);
-    return (dead);
-}
-
-static void set_dead(t_data *data, int value)
-{
-    pthread_mutex_lock(&data->dead_mutex);
-    data->dead = value;
-    pthread_mutex_unlock(&data->dead_mutex);
-}
-
-void *check_deaths(void *void_data)
-{
-    int i = 0;
-    t_data *data = (t_data *)void_data;
-
-    while (1)
-    {
-        if (did_philos_eat_enough(data) || get_dead(data))
-        {
-			set_dead(data, true);
-            break;
-        }
-        if (check_time_to_die(data, i))
-        {
-            print_dead(&data->philos[i]);
-            set_dead(data, true);
-            break;
-        }
-        usleep(100);
-        i = (i + 1) % data->philo_num;
-    }
-    return (NULL);
+	if (ft_atoi(argv[1]) < 1 || ft_atoi(argv[1]) > 200)
+	{
+		printf("Error: Number of philosophers must be between 1 and 200.\n");
+		exit(EXIT_FAILURE);
+	}
+	if (ft_atoi(argv[2]) < 60)
+	{
+		printf("Error: Time to die must be at least 60 ms.\n");
+		exit(EXIT_FAILURE);
+	}
+	if (ft_atoi(argv[3]) < 60)
+	{
+		printf("Error: Time to eat must be at least 60 ms.\n");
+		exit(EXIT_FAILURE);
+	}
+	if (ft_atoi(argv[4]) < 60)
+	{
+		printf("Error: Time to sleep must be at least 60 ms.\n");
+		exit(EXIT_FAILURE);
+	}
+	if (argv[5] && ft_atoi(argv[5]) < 1)
+	{
+		printf("Error: Number of meals must be at least 1.\n");
+		exit(EXIT_FAILURE);
+	}
 }

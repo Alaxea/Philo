@@ -6,7 +6,7 @@
 #    By: alicja <alicja@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/09 17:39:20 by astefans          #+#    #+#              #
-#    Updated: 2024/11/16 20:01:44 by alicja           ###   ########.fr        #
+#    Updated: 2024/11/26 14:49:46 by alicja           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC = cc
 CFLAGS = -g -Wall -Wextra -Werror -pthread -g
 RM = rm -f
 NAME = philo
-SRC = action.c check.c init.c philo.c time.c utils.c
+SRC = action.c death.c init.c input.c main.c philo.c status.c time.c
 OBJ_PATH = objects/
 OBJ = $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 INC = -I ./includes/

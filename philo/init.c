@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:58:57 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/24 11:25:58 by alicja           ###   ########.fr       */
+/*   Updated: 2024/11/26 13:44:36 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ void	init_philosophers(t_data *data)
 		i++;
 	}
 }
+
 void	free_data(t_data *data)
 {
-	if (data->threads) 
+	if (data->threads)
 		free(data->threads);
-	if (data->forks) 
+	if (data->forks)
 		free(data->forks);
-	if (data->philos) 
+	if (data->philos)
 		free(data->philos);
 	pthread_mutex_destroy(&data->dead_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 }
 
-
 void	init_data(t_data *data, int argc, char **argv)
-{	
+{
 	data->philo_num = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
@@ -71,7 +71,7 @@ void	init_data(t_data *data, int argc, char **argv)
 	data->threads = malloc(sizeof(pthread_t) * data->philo_num);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_num);
 	data->philos = malloc(sizeof(t_philo) * data->philo_num);
-	if (!data->threads || !data->forks || !data->philos) 
+	if (!data->threads || !data->forks || !data->philos)
 	{
 		perror("malloc failed");
 		free_data(data);
