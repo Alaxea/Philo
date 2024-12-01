@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:58:50 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/26 13:43:35 by alicja           ###   ########.fr       */
+/*   Updated: 2024/12/01 17:58:30 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ bool	did_philos_eat_enough(t_data *data)
 		return (false);
 	while (i < data->philo_num)
 	{
+		pthread_mutex_lock(&data->philos[i].meal_mutex);
 		if (data->philos[i].eat_counter < data->eat_num)
+		{
+			pthread_mutex_unlock(&data->philos[i].meal_mutex);
 			return (false);
+		}
+		pthread_mutex_unlock(&data->philos[i].meal_mutex);
 		i++;
 	}
 	return (true);

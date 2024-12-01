@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:59:22 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/26 14:52:11 by alicja           ###   ########.fr       */
+/*   Updated: 2024/12/01 17:50:55 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ void	*philo_life(void *philo)
 	pthread_mutex_lock(&ph->meal_mutex);
 	ph->last_meal = get_time();
 	pthread_mutex_unlock(&ph->meal_mutex);
-	pthread_create(&ph->monitoring, NULL, &check_deaths, ph->data);
 	if (ph->id % 2 == 0)
 		ft_usleep(10);
 	while (!get_dead(ph->data) && !did_philos_eat_enough(ph->data))
 	{
+		if (ph->eat_counter >= ph->data->eat_num && ph->data->eat_num != -1)
+			break ;
 		print_thinking(ph);
 		take_forks(ph);
 		print_eating(ph);
@@ -57,8 +58,6 @@ void	*philo_life(void *philo)
 		ft_usleep(ph->data->time_to_eat);
 		leave_forks(ph);
 		go_sleep(ph);
-		print_thinking(ph);
 	}
-	pthread_join(ph->monitoring, NULL);
 	return (NULL);
 }

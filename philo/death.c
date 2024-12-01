@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:59:23 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/26 14:32:59 by alicja           ###   ########.fr       */
+/*   Updated: 2024/12/01 17:48:42 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_time_to_die(t_data *data, int i)
 	return (result);
 }
 
-static void	set_dead(t_data *data, int value)
+void	set_dead(t_data *data, int value)
 {
 	pthread_mutex_lock(&data->dead_mutex);
 	data->dead = value;
@@ -51,9 +51,11 @@ void	*check_deaths(void *void_data)
 	data = (t_data *)void_data;
 	while (1)
 	{
-		if (did_philos_eat_enough(data) || get_dead(data))
+		if (did_philos_eat_enough(data))
+			break ;
+		if (get_dead(data))
 		{
-			set_dead(data, true);
+			print_dead(&data->philos[i]);
 			break ;
 		}
 		if (check_time_to_die(data, i))

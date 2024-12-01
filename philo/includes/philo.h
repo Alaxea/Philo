@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 17:39:33 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/26 14:50:41 by alicja           ###   ########.fr       */
+/*   Updated: 2024/12/01 17:51:24 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void		print_fork(t_philo *philo);
 /*time*/
 long		get_time(void);
 void		ft_usleep(int ms);
+
 #endif

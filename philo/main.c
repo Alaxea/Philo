@@ -6,7 +6,7 @@
 /*   By: alicja <alicja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:59:22 by astefans          #+#    #+#             */
-/*   Updated: 2024/11/26 14:49:06 by alicja           ###   ########.fr       */
+/*   Updated: 2024/12/01 17:45:47 by alicja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	start_simulation(t_data *data)
 {
 	int	i;
 
+	i = 0;
 	data->start_time = get_time();
 	if (data->philo_num == 1)
 		return (one_philo(data));
@@ -30,12 +31,14 @@ void	start_simulation(t_data *data)
 	while (i < data->philo_num)
 	{
 		pthread_create(&data->threads[i], NULL, &philo_life, &data->philos[i]);
+		pthread_create(&data->philos[i].monitoring, NULL, &check_deaths, data);
 		i++;
 	}
 	i = 0;
 	while (i < data->philo_num)
 	{
 		pthread_join(data->threads[i], NULL);
+		pthread_join(data->philos[i].monitoring, NULL);
 		i++;
 	}
 }
