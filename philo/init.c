@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "includes/philo.h"
-#include <stdlib.h>
 
 void	init_forks(t_data *data)
 {
